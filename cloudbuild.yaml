@@ -1,0 +1,35 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '-t'
+      - '$_IMAGE_NAME:$COMMIT_SHA'
+      - .
+      - '-f'
+      - $_DOCKERFILE_NAME
+    dir: $_DOCKERFILE_DIR
+    id: Build
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - '$_IMAGE_NAME:$COMMIT_SHA'
+    id: Push
+images:
+  - '$_IMAGE_NAME:$COMMIT_SHA'
+options:
+  substitutionOption: ALLOW_LOOSE
+substitutions:
+  _K8S_NAMESPACE: default
+  _K8S_ANNOTATIONS: gcb-trigger-id=f3a80584-d8ca-4ff7-addf-45859f44bd2e
+  _GKE_LOCATION: us-central1
+  _K8S_LABELS: ''
+  _DOCKERFILE_DIR: ''
+  _GKE_CLUSTER: g33kzone-thoughtworks-gke
+  _DOCKERFILE_NAME: Dockerfile
+  _K8S_YAML_PATH: kubernetes/k8s.yaml
+  _OUTPUT_BUCKET_PATH: g33kzone-thoughtworks_cloudbuild/deploy
+  _IMAGE_NAME: gcr.io/g33kzone-thoughtworks/github.com/g33kzone/go-gin-palindrome
+  _K8S_APP_NAME: go-gin-palindrome
+tags:
+  - gcp-cloud-build-deploy
+  - $_K8S_APP_NAME

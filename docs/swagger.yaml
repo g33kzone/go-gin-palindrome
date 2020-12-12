@@ -1,0 +1,134 @@
+definitions:
+  model.ErrorResponse:
+    properties:
+      errorMessage:
+        type: string
+    type: object
+  model.Note:
+    properties:
+      id:
+        type: integer
+      ispalindrome:
+        type: boolean
+      message:
+        type: string
+    type: object
+  model.NoteRequest:
+    properties:
+      message:
+        type: string
+    type: object
+  model.NoteResponse:
+    properties:
+      id:
+        type: integer
+      ispalindrome:
+        type: boolean
+      message:
+        type: string
+    type: object
+  model.NotesResponse:
+    properties:
+      notes:
+        items:
+          $ref: '#/definitions/model.NoteResponse'
+        type: array
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /notes:
+    get:
+      consumes:
+      - application/json
+      description: Captures messages received and saves to the postgresql database
+      operationId: note-list-get-g33kzone
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.NotesResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Fetch all recent messages saved to database
+    post:
+      consumes:
+      - application/json
+      description: Captures messages received and saves to the postgresql database
+      operationId: note-post-g33kzone
+      parameters:
+      - description: Message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/model.NoteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Note'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Save message to postgres db
+  /notes/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete messages from postgres db based on id received from Delete API
+      operationId: note-delete-g33kzone
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Delete a single message based on id
+    get:
+      consumes:
+      - application/json
+      description: Captures messages received and saves to the postgresql database
+      operationId: note-get-g33kzone
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.NoteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Fetch a single message based on id
+swagger: "2.0"

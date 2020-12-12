@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: go-qlik-palindrome
+  name: go-qlik-palindrome
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-qlik-palindrome
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: go-qlik-palindrome
+    spec:
+      containers:
+        - env:
+            - name: GO_GIN_IP_ADDR
+              valueFrom:
+                configMapKeyRef:
+                  key: GO_GIN_IP_ADDR
+                  name: go-qlik-palindrome-config-ilf2
+            - name: GO_GIN_IP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: GO_GIN_IP_PORT
+                  name: go-qlik-palindrome-config-ilf2
+            - name: GO_DB_INSTANCE
+              valueFrom:
+                configMapKeyRef:
+                  key: GO_DB_INSTANCE
+                  name: go-qlik-palindrome-config-ilf2
+            - name: GO_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: GO_DB_NAME
+                  name: go-qlik-palindrome-config-ilf2
+            - name: GO_DB_IP_ADDR
+              valueFrom:
+                configMapKeyRef:
+                  key: GO_DB_IP_ADDR
+                  name: go-qlik-palindrome-config-ilf2
+            - name: GO_DB_IP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: GO_DB_IP_PORT
+                  name: go-qlik-palindrome-config-ilf2
+            - name: GO_DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: GO_DB_USER
+                  name: go-qlik-palindrome-config-ilf2
+            - name: GO_DB_PWD
+              valueFrom:
+                configMapKeyRef:
+                  key: GO_DB_PWD
+                  name: go-qlik-palindrome-config-ilf2
+          image: gcr.io/qlik-demo-288714/github.com/g33kzone/go-message-palindrome
+          imagePullPolicy: IfNotPresent
+          name: go-message-palindrome-sha256-1
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: go-qlik-palindrome
+  name: go-qlik-palindrome-hpa-0qai
+  namespace: default
+spec:
+  maxReplicas: 5
+  metrics:
+    - resource:
+        name: cpu
+        targetAverageUtilization: 80
+      type: Resource
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: go-qlik-palindrome
+---
+apiVersion: v1
+kind: Service
+metadata:
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app: go-qlik-palindrome
+  name: go-qlik-palindrome-service
+  namespace: default
+spec:
+  clusterIP: 10.60.12.83
+  externalTrafficPolicy: Cluster
+  ports:
+    - nodePort: 32347
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: go-qlik-palindrome
+  sessionAffinity: None
+  type: LoadBalancer
