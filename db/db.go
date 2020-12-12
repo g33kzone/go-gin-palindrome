@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/g33kzone/go-message-palindrome/config"
-	"github.com/g33kzone/go-message-palindrome/model"
+	"github.com/g33kzone/go-gin-palindrome/config"
+	"github.com/g33kzone/go-gin-palindrome/model"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq" //db utils
 	log "github.com/sirupsen/logrus"

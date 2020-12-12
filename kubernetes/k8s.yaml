@@ -62,9 +62,9 @@ spec:
                 configMapKeyRef:
                   key: GO_DB_PWD
                   name: go-qlik-palindrome-config-ilf2
-          image: gcr.io/qlik-demo-288714/github.com/g33kzone/go-message-palindrome
+          image: gcr.io/qlik-demo-288714/github.com/g33kzone/go-gin-palindrome
           imagePullPolicy: IfNotPresent
-          name: go-message-palindrome-sha256-1
+          name: go-gin-palindrome-sha256-1
 ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler

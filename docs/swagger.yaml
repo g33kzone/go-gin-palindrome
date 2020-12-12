@@ -36,7 +36,6 @@ definitions:
     type: object
 info:
   contact: {}
-  license: {}
 paths:
   /notes:
     get:
@@ -84,7 +83,8 @@ paths:
     delete:
       consumes:
       - application/json
-      description: Delete messages from postgres db based on id received from Delete API
+      description: Delete messages from postgres db based on id received from Delete
+        API
       operationId: note-delete-g33kzone
       parameters:
       - description: ID

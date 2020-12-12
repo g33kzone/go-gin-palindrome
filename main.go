@@ -4,10 +4,10 @@ import (
 	"flag"
 	"os"
 
-	"github.com/g33kzone/go-message-palindrome/config"
-	"github.com/g33kzone/go-message-palindrome/db"
-	"github.com/g33kzone/go-message-palindrome/docs"
-	"github.com/g33kzone/go-message-palindrome/route"
+	"github.com/g33kzone/go-gin-palindrome/config"
+	"github.com/g33kzone/go-gin-palindrome/db"
+	"github.com/g33kzone/go-gin-palindrome/docs"
+	"github.com/g33kzone/go-gin-palindrome/route"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )

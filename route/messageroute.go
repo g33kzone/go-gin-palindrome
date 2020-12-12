@@ -1,8 +1,8 @@
 package route
 
 import (
-	"github.com/g33kzone/go-message-palindrome/db"
-	"github.com/g33kzone/go-message-palindrome/handler"
+	"github.com/g33kzone/go-gin-palindrome/db"
+	"github.com/g33kzone/go-gin-palindrome/handler"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware

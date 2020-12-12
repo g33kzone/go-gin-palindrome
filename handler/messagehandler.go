@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/g33kzone/go-message-palindrome/db"
-	"github.com/g33kzone/go-message-palindrome/model"
-	"github.com/g33kzone/go-message-palindrome/service"
+	"github.com/g33kzone/go-gin-palindrome/db"
+	"github.com/g33kzone/go-gin-palindrome/model"
+	"github.com/g33kzone/go-gin-palindrome/service"
 	"github.com/gin-gonic/gin"
 )
 

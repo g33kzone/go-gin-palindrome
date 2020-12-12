@@ -1,7 +1,7 @@
 package route
 
 import (
-	"github.com/g33kzone/go-message-palindrome/db"
+	"github.com/g33kzone/go-gin-palindrome/db"
 	"github.com/gin-gonic/gin"
 )
 
