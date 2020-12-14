@@ -2,14 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: go-qlik-palindrome
-  name: go-qlik-palindrome
+    app: go-thoughtworks-palindrome
+  name: go-thoughtworks-palindrome
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: go-qlik-palindrome
+      app: go-thoughtworks-palindrome
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app: go-qlik-palindrome
+        app: go-thoughtworks-palindrome
     spec:
       containers:
         - env:
@@ -26,43 +26,43 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: GO_GIN_IP_ADDR
-                  name: go-qlik-palindrome-config-ilf2
+                  name: go-thoughtworks-palindrome-config-ilf2
             - name: GO_GIN_IP_PORT
               valueFrom:
                 configMapKeyRef:
                   key: GO_GIN_IP_PORT
-                  name: go-qlik-palindrome-config-ilf2
+                  name: go-thoughtworks-palindrome-config-ilf2
             - name: GO_DB_INSTANCE
               valueFrom:
                 configMapKeyRef:
                   key: GO_DB_INSTANCE
-                  name: go-qlik-palindrome-config-ilf2
+                  name: go-thoughtworks-palindrome-config-ilf2
             - name: GO_DB_NAME
               valueFrom:
                 configMapKeyRef:
                   key: GO_DB_NAME
-                  name: go-qlik-palindrome-config-ilf2
+                  name: go-thoughtworks-palindrome-config-ilf2
             - name: GO_DB_IP_ADDR
               valueFrom:
                 configMapKeyRef:
                   key: GO_DB_IP_ADDR
-                  name: go-qlik-palindrome-config-ilf2
+                  name: go-thoughtworks-palindrome-config-ilf2
             - name: GO_DB_IP_PORT
               valueFrom:
                 configMapKeyRef:
                   key: GO_DB_IP_PORT
-                  name: go-qlik-palindrome-config-ilf2
+                  name: go-thoughtworks-palindrome-config-ilf2
             - name: GO_DB_USER
               valueFrom:
                 configMapKeyRef:
                   key: GO_DB_USER
-                  name: go-qlik-palindrome-config-ilf2
+                  name: go-thoughtworks-palindrome-config-ilf2
             - name: GO_DB_PWD
               valueFrom:
                 configMapKeyRef:
                   key: GO_DB_PWD
-                  name: go-qlik-palindrome-config-ilf2
-          image: gcr.io/qlik-demo-288714/github.com/g33kzone/go-gin-palindrome
+                  name: go-thoughtworks-palindrome-config-ilf2
+          image: gcr.io/g33kzone-thoughtworks/github.com/g33kzone/go-gin-palindrome
           imagePullPolicy: IfNotPresent
           name: go-gin-palindrome-sha256-1
 ---
@@ -70,8 +70,8 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   labels:
-    app: go-qlik-palindrome
-  name: go-qlik-palindrome-hpa-0qai
+    app: go-thoughtworks-palindrome
+  name: go-thoughtworks-palindrome-hpa-0qai
   namespace: default
 spec:
   maxReplicas: 5
@@ -84,7 +84,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: go-qlik-palindrome
+    name: go-thoughtworks-palindrome
 ---
 apiVersion: v1
 kind: Service
@@ -92,11 +92,11 @@ metadata:
   finalizers:
     - service.kubernetes.io/load-balancer-cleanup
   labels:
-    app: go-qlik-palindrome
-  name: go-qlik-palindrome-service
+    app: go-thoughtworks-palindrome
+  name: go-thoughtworks-palindrome-service
   namespace: default
 spec:
-  clusterIP: 10.60.12.83
+  clusterIP: 35.229.137.10
   externalTrafficPolicy: Cluster
   ports:
     - nodePort: 32347
@@ -104,6 +104,6 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app: go-qlik-palindrome
+    app: go-thoughtworks-palindrome
   sessionAffinity: None
   type: LoadBalancer
