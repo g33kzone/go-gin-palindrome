@@ -131,4 +131,22 @@ paths:
           schema:
             $ref: '#/definitions/model.ErrorResponse'
       summary: Fetch a single message based on id
+  /test:
+    get:
+      consumes:
+      - application/json
+      description: Captures messages received and saves to the postgresql database
+      operationId: note-test-get-g33kzone
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.NoteResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Fetch all recent messages saved to database
 swagger: "2.0"

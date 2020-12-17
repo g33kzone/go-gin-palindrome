@@ -118,3 +118,22 @@ func DeleteMessageHandler(c *gin.Context, db *db.Db) {
 	}
 
 }
+
+// FetchTestHandler - Handler to fetch dummy message
+// Authenticate godoc
+// @Summary Fetch all recent messages saved to database
+// @Description Captures messages received and saves to the postgresql database
+// @ID note-test-get-g33kzone
+// @Accept json
+// @Produce json
+// @Success 200 {object} model.NoteResponse
+// @Failure 401 {object} model.ErrorResponse
+// @Router /test [get]
+func FetchTestHandler(c *gin.Context, db *db.Db) {
+
+	// note = model.Note{ID: id, Message: noteRequest.Message, IsPalindrome: chkFlag}
+
+	noteResponse := model.NoteResponse{ID: 1, Message: "Test Message", IsPalindrome: false}
+
+	c.JSON(http.StatusOK, noteResponse)
+}

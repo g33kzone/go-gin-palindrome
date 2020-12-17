@@ -22,4 +22,7 @@ func initRoute(msgRoutes *gin.RouterGroup, db *db.Db) {
 	msgRoutes.DELETE("/notes/:id", func(c *gin.Context) {
 		handler.DeleteMessageHandler(c, db)
 	})
+	msgRoutes.GET("/test", func(c *gin.Context) {
+		handler.FetchTestHandler(c, db)
+	})
 }

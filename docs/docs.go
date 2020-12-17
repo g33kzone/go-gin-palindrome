@@ -162,6 +162,33 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/test": {
+            "get": {
+                "description": "Captures messages received and saves to the postgresql database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Fetch all recent messages saved to database",
+                "operationId": "note-test-get-g33kzone",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.NoteResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/model.ErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
